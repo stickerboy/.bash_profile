@@ -61,7 +61,7 @@ alias conf='sudo vim /Applications/mamp/apache2/conf/httpd.conf'
 alias www='cd /Applications/mamp/apache2/htdocs/'
 
 alias ..='cd ..'
-alias la='ls -a'
+alias la='lsmod'
 alias bot='ruby ~/irc-scripts/bot.rb'
 
 # Alias some git commands
