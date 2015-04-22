@@ -60,6 +60,11 @@ lsmod() {
     *2^(8-i));if(k)printf("%0o ",k);print}'
 }
 
+get_logs() {
+    cat /Applications/mamp/apache2/logs/$1
+}
+alias logs='get_logs'
+
 gitstats() {
     git log --stat --author $(git config --get user.email) --since="last year" --until="last month" | awk -F',' '/files? changed/ {
         files += $1
