@@ -86,6 +86,7 @@ gitstats() {
 alias bashme="vim ~/.bashrc"
 alias bashed="source ~/.bashrc"
 alias rc="cat ~/.bashrc"
+alias rebash="cp ~/bash_settings/.bashrc ~/.bashrc; bashed; echo rebashed"
 
 alias md5="md5sum"
 alias ping="ping -n 10"
