@@ -1,17 +1,3 @@
-alias flush='sudo killall -HUP mDNSResponder'
-alias flush2='sudo dscacheutil -flushcache'
-alias start='sudo /Applications/mamp/ctlscript.sh start'
-alias restart='sudo /Applications/mamp/ctlscript.sh restart'
-alias stop='sudo /Applications/mamp/ctlscript.sh stop'
-alias bashme='sudo vim ~/.bash_profile'
-alias bashed='source ~/.bash_profile'
-alias hosts='sudo vim /private/etc/hosts'
-alias vhosts='sudo vim /Applications/mamp/apache2/conf/extra/httpd-vhosts.conf'
-alias conf='sudo vim /Applications/mamp/apache2/conf/httpd.conf'
-alias www='cd /Applications/mamp/apache2/htdocs/'
-alias ..='cd ..'
-alias la='ls -a'
-alias bot='ruby ~/irc-scripts/bot.rb'
 #################################################################################
 # ~/.bashrc -- modified
 #
@@ -56,6 +42,26 @@ END {
 ################################################################################
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+alias bashme='sudo vim ~/.bash_profile'
+alias bashed='source ~/.bash_profile'
+alias rc='cat ~/.bash_profile'
+
+alias flush='sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say flushed' #for yosemite
+alias flush2='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say flushed' #for 10.9 and and below
+
+alias start='sudo /Applications/mamp/ctlscript.sh start'
+alias restart='sudo /Applications/mamp/ctlscript.sh restart'
+alias stop='sudo /Applications/mamp/ctlscript.sh stop'
+
+alias hosts='sudo vim /private/etc/hosts'
+alias vhosts='sudo vim /Applications/mamp/apache2/conf/extra/httpd-vhosts.conf'
+alias conf='sudo vim /Applications/mamp/apache2/conf/httpd.conf'
+alias www='cd /Applications/mamp/apache2/htdocs/'
+
+alias ..='cd ..'
+alias la='ls -a'
+alias bot='ruby ~/irc-scripts/bot.rb'
+
 # Alias some git commands
 
 # Git FTP
