@@ -17,8 +17,8 @@ export PS1="\n[\[\033[1;37m\@ :: \w\[\033[0m]\n[digital@wizzard] $ "
 ################################################################################
 
 lsmod() {
-    ls -l | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/) \
-             *2^(8-i));if(k)printf("%0o ",k);print}'
+    ls -al | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/) \
+    *2^(8-i));if(k)printf("%0o ",k);print}'
 }
 
 get_logs() {
@@ -27,20 +27,20 @@ get_logs() {
 alias logs='get_logs'
 
 gitstats() {
-git log --stat --author $(git config --get user.email) --since="last year" --until="last month" | awk -F',' '/files? changed/ {
-    files += $1
-    insertions += $2
-    deletions += $3
-    print
+    git log --stat --author $(git config --get user.email) --since="last year" --until="last month" | awk -F',' '/files? changed/ {
+        files += $1
+        insertions += $2
+        deletions += $3
+        print
+    }
+    END {
+        print "Files Changed: " files
+        print "Insertions: " insertions
+        print "Deletions: " deletions
+        print "Lines changed: " insertions + deletions
+    }'
 }
-END {
-    print "Files Changed: " files
-    print "Insertions: " insertions
-    print "Deletions: " deletions
-    print "Lines changed: " insertions + deletions
 
-}'
-}
 # ALIAS COMMANDS
 ################################################################################
 
