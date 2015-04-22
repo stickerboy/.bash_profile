@@ -39,7 +39,7 @@ function start_agent {
 							        start_agent;
 								fi
 
-# Functions
+# FUNCTIONS
 ################################################################################
 
 function serv {
@@ -55,8 +55,9 @@ function addpath {
 	setx path "%path%;$1"
 }
 
-# Alias commands
+# ALIAS COMMANDS
 ################################################################################
+
 alias bashme="vim ~/.bashrc"
 alias bashed="source ~/.bashrc"
 alias rc="cat ~/.bashrc"
