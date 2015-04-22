@@ -60,6 +60,21 @@ lsmod() {
     *2^(8-i));if(k)printf("%0o ",k);print}'
 }
 
+gitstats() {
+    git log --stat --author $(git config --get user.email) --since="last year" --until="last month" | awk -F',' '/files? changed/ {
+        files += $1
+        insertions += $2
+        deletions += $3
+        print
+    }
+    END {
+        print "Files Changed: " files
+        print "Insertions: " insertions
+        print "Deletions: " deletions
+        print "Lines changed: " insertions + deletions
+    }'
+}
+
 # ALIAS COMMANDS
 ################################################################################
 
