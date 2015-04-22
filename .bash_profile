@@ -9,6 +9,9 @@
 # EXPORTS
 ################################################################################
 
+export PS1="\n[\[\033[1;37m\@ :: \w\[\033[0m]\n[digital@wizzard] $ "
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # FUNCTIONS
 ################################################################################
@@ -41,7 +44,6 @@ END {
 # ALIAS COMMANDS
 ################################################################################
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 alias bashme='sudo vim ~/.bash_profile'
 alias bashed='source ~/.bash_profile'
 alias rc='cat ~/.bash_profile'
