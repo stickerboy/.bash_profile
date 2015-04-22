@@ -59,7 +59,7 @@ function addpath {
 ################################################################################
 alias bashme="vim ~/.bashrc"
 alias bashed="source ~/.bashrc"
-alias prof="cat ~/.bashrc"
+alias rc="cat ~/.bashrc"
 
 alias md5="md5sum"
 alias ping="ping -n 10"
