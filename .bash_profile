@@ -63,5 +63,25 @@ alias la='ls -a'
 alias bot='ruby ~/irc-scripts/bot.rb'
 
 # Alias some git commands
+alias status='git status'
+alias check='git checkout'
+alias checkout='git checkout'
+alias pull='git pull'
+alias branch='git branch'
+alias tag='git tag'
+alias fetch='git fetch'
+alias clone='git clone'
+alias commit='git commit -m'
+alias push='git push'
+function cherry() { git cherry-pick $1; }
+function cherrypick() { git cherry-pick $1; }
+alias undo='git reset --soft ^HEAD'
 
 # Git FTP
+alias ftpush='git ftp push'
+alias ftpull='git ftp pull'
+alias ftpinit='git ftp init'
+alias ftpdown='git ftp bootstrap'
+alias ftphelp='git ftp help --man'
+alias ftplog='git ftp log'
+alias ftpshow='git ftp show'
