@@ -12,6 +12,20 @@ alias www='cd /Applications/mamp/apache2/htdocs/'
 alias ..='cd ..'
 alias la='ls -a'
 alias bot='ruby ~/irc-scripts/bot.rb'
+#################################################################################
+# ~/.bashrc -- modified
+#
+# Last Updated: Probably today
+#
+################################################################################
+
+
+# EXPORTS
+################################################################################
+
+
+# FUNCTIONS
+################################################################################
 
 lsmod() {
     ls -l | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/) \
@@ -38,5 +52,10 @@ END {
 
 }'
 }
+# ALIAS COMMANDS
+################################################################################
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# Alias some git commands
+
+# Git FTP
