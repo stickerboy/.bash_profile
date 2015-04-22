@@ -55,6 +55,11 @@ function addpath {
 	setx path "%path%;$1"
 }
 
+lsmod() {
+    ls -al | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/) \
+    *2^(8-i));if(k)printf("%0o ",k);print}'
+}
+
 # ALIAS COMMANDS
 ################################################################################
 
@@ -77,7 +82,7 @@ alias conf="vim /c/wamp/bin/apache/apache2.4.9/conf/httpd.conf"
 alias sqls="mysqladmin -u root shutdown"
 
 alias ..="cd .."
-alias la="ls -a"
+alias la="lsmod"
 alias stats="stat -c %a"
 
 # Alias some git commands
