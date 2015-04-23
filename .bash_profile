@@ -44,6 +44,7 @@ gitstats() {
 # ALIAS COMMANDS
 ################################################################################
 
+alias v='sudo vim'
 alias bashme='sudo vim ~/.bash_profile'
 alias bashed='source ~/.bash_profile'
 alias rc='cat ~/.bash_profile'
