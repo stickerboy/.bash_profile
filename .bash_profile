@@ -48,8 +48,8 @@ alias bashme='sudo vim ~/.bash_profile'
 alias bashed='source ~/.bash_profile'
 alias rc='cat ~/.bash_profile'
 
-alias flush='sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;say flushed' #for yosemite
-alias flush2='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say flushed' #for 10.9 and and below
+alias flush='sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;echo DNS flushed' #for yosemite
+alias flush2='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;echo DNS flushed' #for 10.9 and and below
 
 alias start='sudo /Applications/mamp/ctlscript.sh start'
 alias restart='sudo /Applications/mamp/ctlscript.sh restart'
