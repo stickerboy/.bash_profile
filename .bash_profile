@@ -63,22 +63,38 @@ alias www='cd /Applications/mamp/apache2/htdocs/'
 
 alias ..='cd ..'
 alias la='lsmod'
+alias dump="rm -rf $1"
+cs() { cd "$1" && ls; }
+ca() { cd "$1" && la; }
+
 alias bot='ruby ~/irc-scripts/bot.rb'
 
 # Alias some git commands
-alias status='git status'
-alias check='git checkout'
-alias checkout='git checkout'
-alias pull='git pull'
-alias branch='git branch'
-alias tag='git tag'
-alias fetch='git fetch'
-alias clone='git clone'
-alias commit='git commit -m'
-alias push='git push'
+alias init="git init"
+alias add="git add"
+alias status="git status"
+alias check="git checkout"
+alias checkout="git checkout"
+alias pull="git pull"
+alias branch="git branch"
+alias tag="git tag"
+alias tags="git push --tag"
+alias merge="git merge"
+alias fetch="git fetch"
+alias clone="git clone"
+alias commit="git commit -m"
+alias amend="git commit --amend -m"
+alias push="git push"
+alias origin="git push -u origin --all"
+alias upstream="git push --set-upstream origin"
 function cherry() { git cherry-pick $1; }
 function cherrypick() { git cherry-pick $1; }
-alias undo='git reset --soft ^HEAD'
+function undo() { git reset --soft HEAD^; echo "Previous commit has been reset"; }
+function reset() { git reset --hard origin/$(git symbolic-ref --short HEAD); echo "Branch has been reset to origin/$(git symbolic-ref --short HEAD)"; }
+alias subi="git submodule init"
+alias subm="git submodule update"
+alias subr="git submodule update --recursive"
+alias ignore="v .gitignore"
 
 # Git FTP
 alias ftpush='git ftp push'
@@ -88,3 +104,23 @@ alias ftpdown='git ftp bootstrap'
 alias ftphelp='git ftp help --man'
 alias ftplog='git ftp log'
 alias ftpshow='git ftp show'
+
+# NPM / React
+alias crap="create-react-app"
+alias npmi="npm install"
+alias npmg="npm install -g"
+alias npmd="npm install --savedev"
+alias npmr="npm run"
+alias npms="npm start"
+alias npmu="npm uninstall"
+alias vendor="webpack --config webpack.config.vendor.js"
+alias cfg="webpack --config webpack.config.js"
+
+# GitBook
+alias book="gitbook";
+function booksrv() {
+	gulp serve;
+}
+
+# Storybook
+alias storybook="npm run storybook"
