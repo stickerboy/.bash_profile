@@ -135,15 +135,22 @@ alias checkout="git checkout"
 alias pull="git pull"
 alias branch="git branch"
 alias tag="git tag"
+alias tags="git push --tag"
+alias merge="git merge"
 alias fetch="git fetch"
 alias clone="git clone"
 alias commit="git commit -m"
 alias amend="git commit --amend -m"
 alias push="git push"
 alias origin="git push -u origin --all"
+alias upstream="git push --set-upstream origin"
 function cherry() { git cherry-pick $1; }
 function cherrypick() { git cherry-pick $1; }
-alias undo="git reset --soft HEAD^"
+function undo() { git reset --soft HEAD^; echo "Previous commit has been reset"; }
+function reset() { git reset --hard origin/$(git symbolic-ref --short HEAD); echo "Branch has been reset to origin/$(git symbolic-ref --short HEAD)"; }
+alias subi="git submodule init"
+alias subm="git submodule update"
+alias subr="git submodule update --recursive"
 alias ignore="v .gitignore"
 
 # Git FTP
@@ -170,6 +177,8 @@ function build() {
 	sleep 3 && "/c/Program Files (x86)/Mozilla Firefox/firefox.exe" -new-tab "http://localhost:9000/";
 	pushstate-server build; 
 }
+alias vendor="webpack --config webpack.config.vendor.js"
+alias cfg="webpack --config webpack.config.js"
 
 # GitBook
 alias book="gitbook";
@@ -179,3 +188,6 @@ function booksrv() {
 
 # Storybook
 alias storybook="npm run storybook"
+
+# .NET
+alias dot="dotnet watch run"
