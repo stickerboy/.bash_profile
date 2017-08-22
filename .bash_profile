@@ -86,7 +86,9 @@ alias commit="git commit -m"
 alias amend="git commit --amend -m"
 alias push="git push"
 alias origin="git push -u origin --all"
-alias upstream="git push --set-upstream origin"
+alias whatbranch="git symbolic-ref --short HEAD";
+alias whatbr="git symbolic-ref --short HEAD";
+function upstream() { git push --set-upstream origin $(git symbolic-ref --short HEAD); }
 function cherry() { git cherry-pick $1; }
 function cherrypick() { git cherry-pick $1; }
 function undo() { git reset --soft HEAD^; echo "Previous commit has been reset"; }
@@ -95,6 +97,7 @@ alias subi="git submodule init"
 alias subm="git submodule update"
 alias subr="git submodule update --recursive"
 alias ignore="v .gitignore"
+alias log="git log -n ${1:-5} --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 # Git FTP
 alias ftpush='git ftp push'
@@ -115,6 +118,7 @@ alias npms="npm start"
 alias npmu="npm uninstall"
 alias vendor="webpack --config webpack.config.vendor.js"
 alias cfg="webpack --config webpack.config.js"
+alias watch="webpack --watch"
 
 # GitBook
 alias book="gitbook";
