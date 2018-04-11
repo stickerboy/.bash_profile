@@ -77,6 +77,7 @@ alias check="git checkout"
 alias checkout="git checkout"
 alias pull="git pull"
 alias branch="git branch"
+alias br="git checkout -b $1"
 alias tag="git tag"
 alias tags="git push --tag"
 alias merge="git merge"
@@ -98,6 +99,10 @@ alias subm="git submodule update"
 alias subr="git submodule update --recursive"
 alias ignore="v .gitignore"
 alias log="git log -n ${1:-5} --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias pop="git stash apply"
+alias stash="git stash"
+alias stashes="git stash list"
+alias base="git rebase -i"
 
 # Git FTP
 alias ftpush='git ftp push'
