@@ -1,7 +1,7 @@
 #################################################################################
 # ~/.bashrc -- modified
 # 
-# Last Updated: Probably today
+# Last Updated: 9:52 AM 4/11/2018
 #
 ################################################################################
 
@@ -60,6 +60,8 @@ else
     fi
 fi
 
+#[[ -s $USERPROFILE/.pik/.pikrc ]] && source $USERPROFILE/.pik/.pikrc
+
 function sshcopy {
         cat ~/.ssh/$1.pub | clip
         echo "SSH Key copied to clipboard"
@@ -97,6 +99,11 @@ gitstats() {
     }'
 }
 
+sendfile() {
+    #$1 is a filename, $2 is remote path
+    scp $1 SERVER:/WEBROOT/$2/$1
+}
+
 # ALIAS COMMANDS
 ################################################################################
 
@@ -104,7 +111,7 @@ alias bashme="vim ~/.bashrc"
 alias bashed="source ~/.bashrc"
 alias rc="cat ~/.bashrc"
 alias rebash="cp ~/bash_settings/.bashrc ~/.bashrc; bashed; echo rebashed"
-alias bsh="rc > $HOME/Desktop/BSHPrfl.md"
+alias bsh="echo -ne 'Current Bash Profile saved to Desktop'; rc > $HOME/Desktop/BSHProfile.md"
 
 alias md5="md5sum"
 alias ping="ping -n 10"
@@ -134,6 +141,7 @@ alias check="git checkout"
 alias checkout="git checkout"
 alias pull="git pull"
 alias branch="git branch"
+alias br="git checkout -b $1"
 alias tag="git tag"
 alias tags="git push --tag"
 alias merge="git merge"
@@ -155,6 +163,10 @@ alias subm="git submodule update"
 alias subr="git submodule update --recursive"
 alias ignore="v .gitignore"
 alias log="git log -n ${1:-5} --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias pop="git stash apply"
+alias stash="git stash"
+alias stashes="git stash list"
+alias base="git rebase -i"
 
 # Git FTP
 alias ftpush="git ftp push"
