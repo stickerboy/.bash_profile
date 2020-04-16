@@ -1,7 +1,7 @@
 #################################################################################
 # ~/.bashrc -- modified
 # 
-# Last Updated: 9:52 AM 4/11/2018
+# Last Updated: Probably today
 #
 ################################################################################
 
@@ -106,11 +106,9 @@ sendfile() {
 
 # ALIAS COMMANDS
 ################################################################################
-
 alias bashme="vim ~/.bashrc"
 alias bashed="source ~/.bashrc"
 alias rc="cat ~/.bashrc"
-alias rebash="cp ~/bash_settings/.bashrc ~/.bashrc; bashed; echo rebashed"
 alias bsh="echo -ne 'Current Bash Profile saved to Desktop'; rc > $HOME/Desktop/BSHProfile.md"
 
 alias md5="md5sum"
@@ -120,8 +118,8 @@ alias dns="ipconfig //displaydns"
 
 alias hosts="vim /c/windows/system32/drivers/etc/hosts"
 alias hostsc="cat /c/windows/system32/drivers/etc/hosts > /c/hosts".
-alias vps="echo -ne '\e]0;irssi\a'; ssh $1;"
-alias work="cd /c/Work/React/"
+alias vps="ssh USER@SEVER;"
+alias send="scp $1 USER@SEVER:~"
 
 alias e="explorer ."
 alias v="vim"
@@ -150,6 +148,7 @@ alias clone="git clone"
 alias commit="git commit -m"
 alias amend="git commit --amend -m"
 alias push="git push"
+alias pish="git push"
 alias origin="git push -u origin --all"
 alias whatbranch="git symbolic-ref --short HEAD";
 alias whatbr="git symbolic-ref --short HEAD";
@@ -160,13 +159,16 @@ function undo() { git reset --soft HEAD^; echo "Previous commit has been reset";
 function reset() { git reset --hard origin/$(git symbolic-ref --short HEAD); echo "Branch has been reset to origin/$(git symbolic-ref --short HEAD)"; }
 alias subi="git submodule init"
 alias subm="git submodule update"
-alias subr="git submodule update --recursive"
+alias subr="git submodule update --recursive --remote"
 alias ignore="v .gitignore"
-alias log="git log -n ${1:-5} --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias log="git log -n ${var:=5} --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias pop="git stash apply"
 alias stash="git stash"
-alias stashes="git stash list"
+alias stashes="git stash list --date=local"
 alias base="git rebase -i"
+function whosyerda() { git reflog --date=local $($1:git symbolid-ref --short HEAD); }
+alias bhis="git reflog --date=local $1"
+alias lc="git log -1 --pretty=%B"
 
 # Git FTP
 alias ftpush="git ftp push"
@@ -181,10 +183,13 @@ alias ftpshow="git ftp show"
 alias crap="create-react-app"
 alias npmi="npm install"
 alias npmg="npm install -g"
-alias npmd="npm install --savedev"
+alias npmd="npm install --save"
+alias npmsd="npm install --savedev"
 alias npmr="npm run"
+alias npmdev="npm run dev"
 alias npms="npm start"
 alias npmu="npm uninstall"
+
 function build() { 
 	echo "Starting build...";
 	npm run build;
