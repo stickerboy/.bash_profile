@@ -9,7 +9,12 @@
 # EXPORTS
 ################################################################################
 
-export PS1="\n[\[\033[1;37m\@ :: \w\[\033[0m]\n[digital@wizzard] $ "
+#export PS1='\n[\@ :: \w]\n[digital@wizzard] $ '
+export PS1="\n[\@ :: \[\e[32m\]\w] \n[digital@wizzard] \[\e[91m\]\$(parse_git_branch)\[\e[00m\] $ "
+
+parse_git_branch() {
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/';
+}
 
 # SSH stuff
 ################################################################################
@@ -47,7 +52,7 @@ if [ -n "$SSH_AGENT_PID" ]; then
     test_identities
     fi
 # if $SSH_AGENT_PID is not properly set, we might be able to load one from
-# $SSH_ENV
+$SSH_ENV
 else
     if [ -f "$SSH_ENV" ]; then
     . "$SSH_ENV" > /dev/null
@@ -60,8 +65,6 @@ else
     fi
 fi
 
-#[[ -s $USERPROFILE/.pik/.pikrc ]] && source $USERPROFILE/.pik/.pikrc
-
 function sshcopy {
         cat ~/.ssh/$1.pub | clip
         echo "SSH Key copied to clipboard"
@@ -69,6 +72,15 @@ function sshcopy {
 
 # FUNCTIONS
 ################################################################################
+
+function conf {
+	read -p "Have you built before pushing this code? (y/n) " RESP 
+	if [ "$RESP" = "y" ]; then   
+		git push;
+	else
+		return 1;
+	fi
+}
 
 function pbcopy {
 	echo $1| clip
@@ -118,7 +130,6 @@ alias dns="ipconfig //displaydns"
 
 alias hosts="vim /c/windows/system32/drivers/etc/hosts"
 alias hostsc="cat /c/windows/system32/drivers/etc/hosts > /c/hosts".
-alias vps="ssh USER@SEVER;"
 alias send="scp $1 USER@SEVER:~"
 
 alias e="explorer ."
@@ -145,18 +156,26 @@ alias tags="git push --tag"
 alias merge="git merge"
 alias fetch="git fetch"
 alias clone="git clone"
+function clonecd() { echo "Cloning reposirtory and entering directory..."; git clone $1 && cd $(basename $1 .git); }
+function cloneinstall() { echo "Cloning repository and running installation..."; git clone $1 && cd $(basename $1 .git) && npmi; }
 alias commit="git commit -m"
 alias amend="git commit --amend -m"
-alias push="git push"
-alias pish="git push"
+alias push="conf"
+alias pish="conf"
 alias origin="git push -u origin --all"
 alias whatbranch="git symbolic-ref --short HEAD";
 alias whatbr="git symbolic-ref --short HEAD";
+alias checkm="git checkout master"
+alias mergem="git merge master"
+alias checkd="git checkout develop"
+alias merged="git merge develop"
 function upstream() { git push --set-upstream origin $(git symbolic-ref --short HEAD); }
+function clonecd() { git clone $1 && cd $(basename $1 .git); }
 function cherry() { git cherry-pick $1; }
 function cherrypick() { git cherry-pick $1; }
 function undo() { git reset --soft HEAD^; echo "Previous commit has been reset"; }
 function reset() { git reset --hard origin/$(git symbolic-ref --short HEAD); echo "Branch has been reset to origin/$(git symbolic-ref --short HEAD)"; }
+function clean() { git reset --hard origin/$(git symbolic-ref --short HEAD); git clean -fxd; echo "Branch has been cleaned and reset to origin/$(git symbolic-ref --short HEAD)"; }
 alias subi="git submodule init"
 alias subm="git submodule update"
 alias subr="git submodule update --recursive --remote"
@@ -165,50 +184,33 @@ alias log="git log -n ${var:=5} --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Cr
 alias pop="git stash apply"
 alias stash="git stash"
 alias stashes="git stash list --date=local"
+alias apply="git stash apply"
 alias base="git rebase -i"
 function whosyerda() { git reflog --date=local $($1:git symbolid-ref --short HEAD); }
 alias bhis="git reflog --date=local $1"
 alias lc="git log -1 --pretty=%B"
-
-# Git FTP
-alias ftpush="git ftp push"
-alias ftpull="git ftp pull"
-alias ftpinit="git ftp init"
-alias ftpdown="git ftp bootstrap"
-alias ftphelp="git ftp help --man"
-alias ftplog="git ftp log"
-alias ftpshow="git ftp show"
+alias gab="git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
+alias hide="git update-index --assume-unchanged $1"
+alias show="git update-index --no-assume-unchanged $1"
 
 # NPM / React
-alias crap="create-react-app"
-alias npmi="npm install"
-alias npmg="npm install -g"
-alias npmd="npm install --save"
-alias npmsd="npm install --savedev"
-alias npmr="npm run"
-alias npmdev="npm run dev"
-alias npms="npm start"
-alias npmu="npm uninstall"
+alias ni="npm install"
+alias ng="npm install -g"
+alias nd="npm install --save"
+alias nsd="npm install --savedev"
+alias nr="npm run"
+alias nrd="npm run dev"
+alias na="npm run add-module"
+alias nb="npm run build"
+alias nm="npm run build-min"
+alias ns="npm start"
+alias nu="npm uninstall"
+alias gcu="npm run serve"
 
-function build() { 
-	echo "Starting build...";
-	npm run build;
-	echo "Starting server...";
-	sleep 3 && "/c/Program Files (x86)/Mozilla Firefox/firefox.exe" -new-tab "http://localhost:9000/";
-	pushstate-server build; 
-}
 alias vendor="webpack --config webpack.config.vendor.js"
 alias cfg="webpack --config webpack.config.js"
 alias watch="webpack --watch"
 
-# GitBook
-alias book="gitbook";
-function booksrv() {
-	gulp serve;
+function web() {
+	ngrok http 8080 -host-header="localhost:8080";
 }
-
-# Storybook
-alias storybook="npm run storybook"
-
-# .NET
-alias dot="dotnet watch run"
